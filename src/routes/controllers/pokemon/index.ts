@@ -3,6 +3,9 @@ import { Pokemon } from '../../../db/entities/Pokemon';
 import { Type } from '../../../db/entities/Type';
 import { ILike, Between } from 'typeorm';
 
+
+
+
 export async function  getPokemon (req: Request, res:Response): Promise<Response>{
     try{
         const {order,...query}=req.query
@@ -15,6 +18,7 @@ export async function  getPokemon (req: Request, res:Response): Promise<Response
             where:conditions,
             order:{
                 [prop]:value
+                //prop? ...{[prop]:value}:...{["num"]:"ASC"}
             },
             relations:{
                 types:true
@@ -33,7 +37,12 @@ export async function getPokemonById (req:Request,res:Response):Promise<Response
     try{
         const {id} = req.params;
         if(!id) return res.status(500).send({"error":"Id not found"})
-        const searchPkmn : Pokemon|null = await Pokemon.findOneBy({id})
+        const searchPkmn : Pokemon|null = await Pokemon.findOne({
+            where:{id},
+            relations:{
+                types:true
+            }
+        })
         if(!searchPkmn) return res.status(404).send({"error":"Pokemon not found"})
         return res.status(200).send({"Pokemon":searchPkmn})
     }catch(err){

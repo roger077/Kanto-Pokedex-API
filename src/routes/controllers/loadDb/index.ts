@@ -9,6 +9,7 @@ async function loadPKMfromAPI():Promise<void>{
     const pokeApiURL: Array<[AxiosResponse]> =  apiInfo.data.results.map(
         async (poke:any)=>{
             const pk = await axios.get(poke.url);
+            
             return pk.data;
         } 
     )
@@ -19,12 +20,11 @@ async function loadPKMfromAPI():Promise<void>{
         type.name=tp.name;
         type.url=tp.url;
         await type.save();
-        console.log(type);
     })
     const allPkmn: Array<[AxiosResponse]>= await Promise.all(pokeApiURL);
     
     allPkmn.forEach(async (e:any) => {
-
+        
         const typeInfo= await Promise.all(
             e.types.map(async (t:any)=>{
                 const currentType : Type|null=await Type.findOneBy({
@@ -34,7 +34,9 @@ async function loadPKMfromAPI():Promise<void>{
                 return currentType;
             })
         )
+        
         const pokemonDb : Pokemon = new Pokemon();
+        pokemonDb.num = e.id
         pokemonDb.name=e.name.charAt(0).toUpperCase() + e.name.slice(1);
         pokemonDb.hp=e.stats[0].base_stat;
         pokemonDb.attack=e.stats[1].base_stat;

@@ -39,6 +39,9 @@ export class Pokemon extends BaseEntity{
     @Column("varchar")
     image:string
 
+    @Column("int")
+    num:number
+
     @ManyToMany(()=>Type,(type)=>type.pokemons)
     types:Type[]
 
