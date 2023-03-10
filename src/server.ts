@@ -6,7 +6,6 @@ import router from './routes/index'
 import loadDB from './routes/controllers/loadDb'
 import {PORT} from './config/config'
 
-declare module 'morgan';
 
 export default class Server{
     private app : Application;
