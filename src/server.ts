@@ -43,10 +43,9 @@ export default class Server{
         try{
             
             await db.initialize()
-            .then(async ()=>await db.synchronize(true))
             .then(()=>console.log("Database is connected"))
             .catch((error : Error)=>console.error({"ERROR IN DATABASE":error}))
-            console.log(db.options)
+            //console.log(db.options)
             await loadDB()
             .then(()=>console.log("Database is loaded"))
             .catch((error: Error)=>console.error({"ERROR TO LOADED DATABASE":error}))

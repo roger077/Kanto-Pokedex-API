@@ -11,7 +11,8 @@ const AppDataSource  = new DataSource ({
     password: DB_PASSWORD,
     database: DB_NAME,
     synchronize:true,
-    logging: true,
+    //logging: true,
+    dropSchema: true,
     entities:[Type,Pokemon]
 })
 
