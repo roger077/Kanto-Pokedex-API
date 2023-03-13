@@ -1,6 +1,6 @@
 import express,{Application} from 'express'
 //import morgan from 'morgan'
-import * as morgan from 'morgan';
+import morgan from 'morgan';
 import db from './db/connections'
 import "reflect-metadata"
 import router from './routes/index'
