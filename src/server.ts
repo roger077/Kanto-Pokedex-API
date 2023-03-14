@@ -35,9 +35,9 @@ export default class Server{
             res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
             next();
         });*/
-        this.app.use(cors())
+        
         this.app.use(cors({
-            origin:FRONT_APP,
+            origin:'https://kanto-pokedex-client.vercel.app/',
             methods:['GET, POST, OPTIONS, PUT, DELETE']
         }))
        //this.app.addListener('close',async ()=> await db.dropDatabase())
