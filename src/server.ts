@@ -35,6 +35,7 @@ export default class Server{
             res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
             next();
         });*/
+        this.app.use(cors())
         this.app.use(cors({
             origin:FRONT_APP,
             methods:['GET, POST, OPTIONS, PUT, DELETE']
