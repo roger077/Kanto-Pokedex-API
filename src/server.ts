@@ -37,7 +37,7 @@ export default class Server{
         });*/
         
         this.app.use(cors({
-            origin:'https://kanto-pokedex-client.vercel.app/',
+            origin:FRONT_APP,
             methods:['GET, POST, OPTIONS, PUT, DELETE']
         }))
        //this.app.addListener('close',async ()=> await db.dropDatabase())
