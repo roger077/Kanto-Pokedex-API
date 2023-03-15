@@ -4,8 +4,6 @@ import {getPokemon,getPokemonById/*,combinedFilters*/} from "../controllers/poke
 const router = Router();
 
 router.get('/',getPokemon)
-
-//router.get('/filters',combinedFilters)
-
 router.get('/:id',getPokemonById)
+
 export default router;

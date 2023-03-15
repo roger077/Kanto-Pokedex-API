@@ -1,4 +1,4 @@
-import {query, Request,Response} from 'express'
+import { Request,Response } from 'express'
 import { Pokemon } from '../../../db/entities/Pokemon';
 import { Type } from '../../../db/entities/Type';
 import { ILike, Between } from 'typeorm';
@@ -9,16 +9,13 @@ import { ILike, Between } from 'typeorm';
 export async function  getPokemon (req: Request, res:Response): Promise<Response>{
     try{
         const {order,...query}=req.query
-        const conditions=await combinedFilters(query)
-        //const {order} = req.body
-        
+        const conditions=await combinedFilters(query)        
         const [prop,value]= order?.toString().split('/') ||[];
-        console.log({[prop]:value})
+        
         const allPokemon:Pokemon[]  = await Pokemon.find({
             where:conditions,
             order:{
                 [prop]:value
-                //prop? ...{[prop]:value}:...{["num"]:"ASC"}
             },
             relations:{
                 types:true
